@@ -69,7 +69,7 @@ class DocParser
 
         $this->xml->save(SERVER_ROOT . $doc);
 
-        ConvertApi\ConvertApi::setApiSecret('7HPvOmYVxtmIzYum');
+        ConvertApi\ConvertApi::setApiSecret($_ENV['CONVERT_API_SECRET']);
         $result = ConvertApi\ConvertApi::convert('pdf', ['File' => SERVER_ROOT . $doc], 'doc');
         $result->getFile()->save(SERVER_ROOT . $pdf);
 

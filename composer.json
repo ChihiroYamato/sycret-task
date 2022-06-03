@@ -17,6 +17,7 @@
         }
     ],
     "require": {
-        "convertapi/convertapi-php": "^1.5"
+        "convertapi/convertapi-php": "^1.5",
+        "vlucas/phpdotenv": "^5.4"
     }
 }

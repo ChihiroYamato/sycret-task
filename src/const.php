@@ -7,3 +7,5 @@ if (! defined('PROJECT_ROOT')) {
 if (! defined('SERVER_ROOT')) {
     define('SERVER_ROOT', PROJECT_ROOT . '/public_html');
 }
+
+Dotenv\Dotenv::createImmutable(PROJECT_ROOT)->load();
