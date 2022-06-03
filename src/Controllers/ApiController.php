@@ -4,9 +4,17 @@ namespace App\Controllers;
 
 use App\Core;
 
+/**
+ * **ApiController** -- реализация контроллера апи запросов
+ */
 final class ApiController implements ControllerInterface
 {
-    public function actionGenDoc() : void
+    /**
+     * **Method** -- обработчик запросов GenDoc, выводит json ответ - результат обработки запроса
+     * @param array $request ассоциативный массив параметров тела запроса
+     * @return void
+     */
+    public function actionGenDoc(array $request) : void
     {
         $response = [];
 
@@ -14,8 +22,6 @@ final class ApiController implements ControllerInterface
             http_response_code(400);
             $response = ['error' => ['code' => 400, 'message' => 'Bad Request: needed Content-Type: application/json']];
         } else {
-            $request = json_decode(file_get_contents('php://input'), true);
-
             switch (true) {
                 case empty($request):
                     http_response_code(400);
@@ -37,11 +43,11 @@ final class ApiController implements ControllerInterface
                     http_response_code(400);
                     $response = ['error' => ['code' => 400, 'message' => 'Bad Request: key RecordID need to be int from 1 to 100']];
                     break;
+                default:
+                    $docParser = new Core\DocParser(file_get_contents($request['URLTemplate']));
+                    $response = $docParser->replace($request['RecordID'])->save();
+                    break;
             }
-
-            $docParser = new Core\DocParser(file_get_contents($request['URLTemplate']));
-
-            $response = $docParser->replace($request['RecordID'])->save();
         }
 
         print_r(json_encode($response, JSON_FORCE_OBJECT));
