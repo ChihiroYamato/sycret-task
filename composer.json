@@ -6,12 +6,17 @@
             "App\\": "src/"
         },
         "classmap": [],
-        "files": []
+        "files": [
+            "./src/const.php"
+        ]
     },
     "authors": [
         {
             "name": "Alexander Mironov",
             "email": "alexan9610@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "convertapi/convertapi-php": "^1.5"
+    }
 }
